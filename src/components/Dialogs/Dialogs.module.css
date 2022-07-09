@@ -1,8 +1,19 @@
+
+
 .messages {
-    padding:10px
+    padding:40px 20px;
+    border: 2px solid red;
+    width: 70%
+
 }
 
 .message {
+    padding:    10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #dfedff;
+    border: 1px solid rgba(32,56,255,0.2);
+
 }
 
 .active {
@@ -10,12 +21,32 @@
 }
 
 .dialogs {
-    display:grid;
-    grid-template-columns: 2fr 10fr;
+    display:flex;
+
 }
 
-.dialog {}
 
-.dialogsItems {
-    padding:10px
+
+
+
+.dialogItem {
+    display:flex;
+    align-items: center;
+
+
+    width: 300px;
+
+
+    padding:5px;
+    margin: 10px;
+    border: 1px solid rgba(32,56,255,0.1);
+
+}
+
+.dialogItem img {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    margin-right: 20px
+
 }

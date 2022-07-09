@@ -29,7 +29,7 @@ body {
 .app-wrapper-content {
 
   grid-area: content;
-  background-color: #ffbcf1;
+  background-color: rgba(91,170,255,0.3);
 
 
 }
