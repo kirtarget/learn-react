@@ -2,8 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin:0;
+  padding:0;
+}
+body {
+  box-sizing: border-box;
+}
 .app-wrapper {
+  position: absolute;
   margin: 0 auto;
+  left:50%;
+  transform: translate(-50%);
+  height: 100%;
   display: grid;
   width: 80%;
   min-width: 800px;
@@ -13,4 +24,20 @@
   grid-template-rows: 4em 1fr;
   grid-template-columns: 2fr 10fr;
   /*grid-gap: 10px;*/
+}
+
+.app-wrapper-content {
+
+  grid-area: content;
+  background-color: #ffbcf1;
+
+
+}
+
+h1 {
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 24px;
+  color: #151e29;
+  border-bottom: 1px solid #151e29;
 }

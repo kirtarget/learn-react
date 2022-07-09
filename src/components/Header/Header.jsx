@@ -3,8 +3,8 @@ import classes from './Header.module.css'
 const Header = ()=> {
     return (
         <header className={classes.header}>
-            <img width='50px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Playstation_logo_colour.svg/2560px-Playstation_logo_colour.svg.png' alt='' />
-            <h2>Социальная сеть на React</h2>
+            <img  src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png' alt='' />
+            <h2>ВReact'е</h2>
         </header>
     )
 }
