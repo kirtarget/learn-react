@@ -1,0 +1,16 @@
+.post {
+    border: 1px dotted white ;
+    margin:5px;
+    padding: 8px;
+
+
+}
+.avatar {
+    width:50px;
+    margin: 20px;
+
+}
+
+.ava_text {
+    display: flex;
+}
