@@ -1,3 +1,4 @@
+import {renderEntireTree} from "../render";
 
 let state = {
     profilePage: {
@@ -26,6 +27,26 @@ let state = {
         ]
     },
     navbar: {
+        sbFriends: [
+            {
+                id: 1,
+                name: 'Кислый',
+                profilePic: 'https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg'
+
+            },
+            {
+                id: 2,
+                name: 'Ржавый',
+                profilePic: 'https://profilemagazine.com/wp-content/uploads/2020/04/Ajmere-Dale-Square-thumbnail.jpg'
+
+            },
+            {
+                id: 3,
+                name: 'Малая',
+                profilePic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh9bkbF9tE8v1HAWyvOa5sFPW-RbuwZq7J21cfojAsVIwNLskF-ea48-QJAFqNexLdUyE&usqp=CAU'
+
+            }
+        ],
         navLinks: [
 
             {
@@ -52,6 +73,17 @@ let state = {
     }
 
 
+}
+
+export let createPost = (message) => {
+    let newPost = {
+        message: message,
+        id: 12,
+        likesCount: 0
+    }
+    state.profilePage.posts.unshift(newPost)
+
+    renderEntireTree(state)
 }
 
 export default state

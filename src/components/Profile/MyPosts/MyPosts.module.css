@@ -16,8 +16,21 @@ h3 {
     margin: 0 auto;
     width:40%;
     height: 4em;
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    border-radius: 8px;
+    outline: none;
+    resize:none;
 }
 .postCreation  button{
-    width: 80px;
-    right:20px;
+    width: 90px;
+    /*border: 3px solid white;*/
+    border-radius: 5px;
+    height: 25px;
+    background-color: #2f26d7;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    box-shadow: 0px 5px 7px -1px rgba(34, 60, 80, 0.2);
 }

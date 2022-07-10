@@ -11,14 +11,16 @@ import News from "./components/News/News";
 
 const App = (props) => {
     return (
-        <BrowserRouter>
+
             <div className='app-wrapper'>
                 <Header/>
-                <Navbar navLinks={props.state.navbar.navLinks}/>
+                <Navbar navLinks={props.state.navbar.navLinks} sbFriends={props.state.navbar.sbFriends}/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path="/profile" element={<Profile postsData={props.state.profilePage.posts}/>}/>
-                        <Route path="/dialogs/*" element={<Dialogs profileImage={props.state.messagesPage.dialogs} messagesData={props.state.messagesPage.messages} dialogsData={props.state.messagesPage.dialogs}/>}/>
+                        <Route path="/profile" element={<Profile postsData={props.state.profilePage.posts} createPost={props.createPost}/>}/>
+                        <Route path="/dialogs/*" element={<Dialogs profileImage={props.state.messagesPage.dialogs}
+                                                                   messagesData={props.state.messagesPage.messages}
+                                                                   dialogsData={props.state.messagesPage.dialogs}/>}/>
 
                         <Route path="/music" element={<Music/>}/>
                         <Route path="/settings" element={<Settings/>}/>
@@ -27,7 +29,8 @@ const App = (props) => {
 
                 </div>
             </div>
-        </BrowserRouter>
+
+
     );
 }
 

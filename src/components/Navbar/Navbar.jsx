@@ -1,16 +1,21 @@
 import classes from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
+import SidebarFriends from "./SidebarFriends/SidebarFriends";
 
-const Navbar = (props)=> {
+const Navbar = (props) => {
 
 
-    let sidebarEls = props.navLinks.map(l=><li><NavLink className={ navData => navData.isActive ? classes.active : classes.item } to={l.link}>{l.name}</NavLink></li>)
+    let sidebarEls = props.navLinks.map(l => <li><NavLink
+        className={navData => navData.isActive ? classes.active : classes.item} to={l.link}>{l.name}</NavLink></li>)
     return (
         <nav className={classes.nav}>
-            <ul>
-                {sidebarEls}
+            <div>
+                <ul>
+                    {sidebarEls}
 
-            </ul>
+                </ul>
+            </div>
+            <SidebarFriends sbFriends={props.sbFriends}/>
         </nav>
     )
 }
