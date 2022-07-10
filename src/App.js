@@ -3,10 +3,11 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs"
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import { Route, Routes} from 'react-router-dom'
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
+import {updateNewPostText} from "./Redux/state";
 
 
 const App = (props) => {
@@ -17,9 +18,15 @@ const App = (props) => {
                 <Navbar navLinks={props.state.navbar.navLinks} sbFriends={props.state.navbar.sbFriends}/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path="/profile" element={<Profile postsData={props.state.profilePage.posts} createPost={props.createPost}/>}/>
+                        <Route path="/profile" element={<Profile newPostText={props.state.profilePage.newPostText}
+                                                                 updateNewPostText={props.updateNewPostText}
+                                                                 postsData={props.state.profilePage.posts}
+                                                                 createPost={props.createPost}/>}/>
                         <Route path="/dialogs/*" element={<Dialogs profileImage={props.state.messagesPage.dialogs}
                                                                    messagesData={props.state.messagesPage.messages}
+                                                                 messageFieldContent={props.state.messagesPage.newMessageText}
+                                                                   sendMessage={props.sendMessage}
+                                                                   updateMessageField={props.updateMessageField}
                                                                    dialogsData={props.state.messagesPage.dialogs}/>}/>
 
                         <Route path="/music" element={<Music/>}/>

@@ -26,6 +26,10 @@ body {
   /*grid-gap: 10px;*/
 }
 
+body {
+  background-color: ghostwhite;
+}
+
 .app-wrapper-content {
 
   grid-area: content;
