@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import store from "./Redux/state";
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 export const renderEntireTree = () => {
@@ -13,10 +14,8 @@ export const renderEntireTree = () => {
         <React.StrictMode>
             <BrowserRouter>
                 <App state={store.getState()}
-                     createPost={store.createPost.bind(store)}
-                     updateNewPostText={store.updateNewPostText.bind(store)}
-                     sendMessage={store.sendMessage.bind(store)}
-                     updateMessageField={store.updateMessageField.bind(store)}
+                     dispatch={store.dispatch.bind(store)}
+
 
                 />
             </BrowserRouter>

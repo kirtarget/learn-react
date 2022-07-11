@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs"
-import { Route, Routes} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
@@ -13,29 +13,20 @@ import {updateNewPostText} from "./Redux/state";
 const App = (props) => {
     return (
 
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar navLinks={props.state.navbar.navLinks} sbFriends={props.state.navbar.sbFriends}/>
-                <div className="app-wrapper-content">
-                    <Routes>
-                        <Route path="/profile" element={<Profile newPostText={props.state.profilePage.newPostText}
-                                                                 updateNewPostText={props.updateNewPostText}
-                                                                 postsData={props.state.profilePage.posts}
-                                                                 createPost={props.createPost}/>}/>
-                        <Route path="/dialogs/*" element={<Dialogs profileImage={props.state.messagesPage.dialogs}
-                                                                   messagesData={props.state.messagesPage.messages}
-                                                                 messageFieldContent={props.state.messagesPage.newMessageText}
-                                                                   sendMessage={props.sendMessage}
-                                                                   updateMessageField={props.updateMessageField}
-                                                                   dialogsData={props.state.messagesPage.dialogs}/>}/>
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar state={props.state}  />
+            <div className="app-wrapper-content">
+                <Routes>
+                    <Route path="/profile" element={<Profile dispatch={props.dispatch} state={props.state}/>}/>
+                    <Route path="/dialogs/*" element={<Dialogs state={props.state} dispatch={props.dispatch}/>}/>
+                    <Route path="/music" element={<Music/>}/>
+                    <Route path="/settings" element={<Settings/>}/>
+                    <Route path="/news" element={<News/>}/>
+                </Routes>
 
-                        <Route path="/music" element={<Music/>}/>
-                        <Route path="/settings" element={<Settings/>}/>
-                        <Route path="/news" element={<News/>}/>
-                    </Routes>
-
-                </div>
             </div>
+        </div>
 
 
     );

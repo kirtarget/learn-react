@@ -1,9 +1,14 @@
+const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT'
+const UPDATE_MESSAGE = 'UPDATE-MESSAGE'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+const ADD_POST = 'ADD-POST'
+
 let store = {
     _state: {
         profilePage: {
             posts: [
-                {message: 'Hi! How are you all?', id: 1, likesCount: 12},
                 {message: 'It\'s my first post', id: 2, likesCount: 8},
+                {message: 'Hi! How are you all?', id: 1, likesCount: 12},
             ],
             newPostText: '',
         },
@@ -97,44 +102,56 @@ let store = {
         }
     },
 
+    dispatch(action) {
+        if (action.type === ADD_POST) {
+            let newPost = {
+                message: this._state.profilePage.newPostText,
+                id: 12,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        }
+        if (action.type === UPDATE_POST_TEXT) {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state)
+        }
+        if (action.type === UPDATE_MESSAGE) {
+            this._state.messagesPage.newMessageText = action.newText
+            this._callSubscriber(this._state)
+        }
+        if (action.type === SEND_MESSAGE) {
+            let newMessage = {
+                id: 7,
+                message: this._state.messagesPage.newMessageText
+            }
+            this._state.messagesPage.messages.push(newMessage)
+            this._state.messagesPage.newMessageText = ''
+            this._callSubscriber(this._state)
+        }
+    },
+
+
     _callSubscriber() {
         console.log('hi')
     },
-    getState(){
+    getState() {
         return this._state
     },
-    createPost() {
-        let newPost = {
-            message: this._state.profilePage.newPostText,
-            id: 12,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.unshift(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
-    updateMessageField(newText) {
-        this._state.messagesPage.newMessageText = newText
-        this._callSubscriber(this._state)
-    },
-    sendMessage() {
-        let newMessage = {
-            id: 7,
-            message: this._state.messagesPage.newMessageText
-        }
-        this._state.messagesPage.messages.push(newMessage)
-        this._state.messagesPage.newMessageText = ''
-        this._callSubscriber(this._state)
-    },
+
+
     subscribe(observer) {
         this._callSubscriber = observer
         console.log('done')
     }
 }
+
+// Создание Action'ов
+export const addPostActionCreator = () =>  ({type: 'ADD-POST'})
+
+export const onPostActionCreator = (text) => ({type: 'UPDATE-POST-TEXT', newText: text})
+
 
 window.state = store._state
 
