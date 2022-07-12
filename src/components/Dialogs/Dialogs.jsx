@@ -4,31 +4,32 @@ import DialogItem from "./DialogItem/DialogItem";
 import React from "react";
 
 
-
 const Dialogs = (props) => {
-    let dialogElements = props.state.messagesPage.dialogs.map(dialog => <DialogItem profileImage={dialog.profileImage} name={dialog.name} id={dialog.id} className={classes.dialogItem} />)
-    let messagesElements = props.state.messagesPage.messages.map(message => <Message className={classes.message} message={message.message}/>)
+
+    let dialogElements = props.dialogState.dialogs.map(dialog => <DialogItem profileImage={dialog.profileImage}
+                                                                             name={dialog.name} id={dialog.id}
+                                                                             className={classes.dialogItem}/>)
+    let messagesElements = props.dialogState.messages.map(message => <Message className={classes.message}
+                                                                              message={message.message}/>)
     let newMessageElement = React.createRef()
 
-    let updateStateMessage = () => {
+    let onMessageChange = () => {
         let text = newMessageElement.current.value
-        props.dispatch({type:'UPDATE-MESSAGE', newText: text})
-    }
-    let newMessage = () => {
-        props.dispatch({type:'SEND-MESSAGE'})
+        props.updateStateMessage(text)
     }
     return (
         <div>
             <h1>📝 Сообщения</h1>
             <div className={classes.dialogs}>
-                <div >
+                <div>
                     {dialogElements}
                 </div>
                 <div className={classes.messages}>
                     {messagesElements}
                     <div className={classes.dialTA}>
-                        <textarea onChange={updateStateMessage} ref={newMessageElement} value={props.state.messagesPage.newMessageText}></textarea>
-                        <button onClick={newMessage}>Отправить</button>
+                        <textarea onChange={onMessageChange} ref={newMessageElement}
+                                  value={props.dialogState.newMessageText}></textarea>
+                        <button onClick={props.newMessage}>Отправить</button>
                     </div>
                 </div>
             </div>

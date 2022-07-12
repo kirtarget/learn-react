@@ -5,7 +5,7 @@ import SidebarFriends from "./SidebarFriends/SidebarFriends";
 const Navbar = (props) => {
 
 
-    let sidebarEls = props.state.navbar.navLinks.map(l => <li><NavLink
+    let sidebarEls = props.navLinks.map(l => <li><NavLink
         className={navData => navData.isActive ? classes.active : classes.item} to={l.link}>{l.name}</NavLink></li>)
     return (
         <nav className={classes.nav}>
@@ -15,7 +15,7 @@ const Navbar = (props) => {
 
                 </ul>
             </div>
-            <SidebarFriends sbFriends={props.state.navbar.sbFriends}/>
+            <SidebarFriends sbFriends={props.sbFriends}/>
         </nav>
     )
 }

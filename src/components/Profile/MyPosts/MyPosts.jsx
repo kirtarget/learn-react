@@ -1,22 +1,18 @@
 import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 import React from "react";
-import {addPostActionCreator, onPostActionCreator} from "../../../Redux/state.js";
 
 const   MyPosts = (props) => {
     // создание компоненты для каждого поста
-    let postsElements = props.state.profilePage.posts.map(p => <Post message={p.message} likes={p.likesCount}/>).reverse()
-
-
+    let postsElements = props.posts.map(p => <Post message={p.message} likes={p.likesCount}/>).reverse()
 
     // Добавление поста и изменения текста нового поста в BLL
-    let addPost = () => {
-        props.dispatch(addPostActionCreator())
+    let onAddPost = () => {
+        props.addPost()
     }
     let onPostChange = () => {
         let text = newPostElement.current.value
-        let action = onPostActionCreator(text)
-        props.dispatch(action )
+        props.updateNewPostText(text)
     }
 
     // Слушатель события для изменения текста
@@ -28,10 +24,10 @@ const   MyPosts = (props) => {
             <div className={classes.postCreation}>
                 {/*Создание поста*/}
                 <div>
-                    <textarea onChange={onPostChange} ref={newPostElement} value={props.state.profilePage.newPostText} />
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Submit post</button>
+                    <button onClick={onAddPost}>Submit post</button>
                 </div>
             </div>
         </div>
