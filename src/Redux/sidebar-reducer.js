@@ -26,6 +26,10 @@ const initialState = {
             link: '/profile'
         },
         {
+            name: 'Пользователи',
+            link: '/users'
+        },
+        {
             name: 'Сообщения',
             link: '/dialogs'
         },
