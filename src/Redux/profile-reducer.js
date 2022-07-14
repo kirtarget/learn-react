@@ -19,7 +19,7 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST:
             let newPost = {
                 message: state.newPostText,
-                id: 12,
+                id: Math.ceil(Math.random() * 35000),
                 likesCount: 0
             }
             return {

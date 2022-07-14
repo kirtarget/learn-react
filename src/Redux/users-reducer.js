@@ -1,53 +1,25 @@
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERSCOUNT = 'SET_TOTAL_USERSCOUNT'
 
 
 export const followAC = (userID) => ({type: FOLLOW, userID})
 export const unfollowAC = (userID) => ({type: UNFOLLOW, userID})
 export const setUsersAC = (users) => ({type: SET_USERS, users})
+export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
+export const setTotalUsersCountAC = totalUsersCount => ({type: SET_TOTAL_USERSCOUNT, totalUsersCount})
 
 const initialState = {
-    users: [
-        // {
-        //     fullName: "Кирилл Карташёв",
-        //     location: {
-        //         country: "Россия",
-        //         city: "Москва"
-        //     },
-        //     status: "Я веган (я)",
-        //     profilePic: "https://i.pinimg.com/originals/e5/06/cf/e506cfcd9f85b11eefd590f871db9784.png",
-        //     id: 180194,
-        //     isFollow: false,
-        // },
-        // {
-        //     fullName: "Николай Гоголь",
-        //     location: {
-        //         country: "Украина",
-        //         city: "Киев"
-        //     },
-        //     status: "Я жив",
-        //     profilePic: "https://i.pinimg.com/originals/e5/06/cf/e506cfcd9f85b11eefd590f871db9784.png",
-        //     id: 66613,
-        //     isFollow: true,
-        // },
-        // {
-        //     fullName: "Юрий Гагарин",
-        //     location: {
-        //         country: "Россия",
-        //         city: "Москва"
-        //     },
-        //     status: "Поехали",
-        //     profilePic: "https://i.pinimg.com/originals/e5/06/cf/e506cfcd9f85b11eefd590f871db9784.png",
-        //     id: 120461,
-        //     isFollow: false,
-        // },
-
-    ]
+    users: [],
+    pageSize: 15,
+    totalUsersCount: 20,
+    currentPage: 1
 }
 
 const usersReducer = (state = initialState, action) => {
-    let stateCopy = {...state}
+
     switch (action.type) {
         case FOLLOW:
 
@@ -55,7 +27,6 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userID) {
-                        console.log('works')
                         return {...u, followed: true}
                     }
 
@@ -73,11 +44,14 @@ const usersReducer = (state = initialState, action) => {
                 })
             }
 
-        case SET_USERS: {
-            if (state.users.length === action.users.length) return
+        case SET_USERS:
+            return {...state, users: action.users}
 
-            return {...state, users: [...state.users, ...action.users]}
-        }
+        case SET_CURRENT_PAGE:
+            return {...state, currentPage: action.currentPage}
+
+        case SET_TOTAL_USERSCOUNT:
+            return {...state, totalUsersCount: action.totalUsersCount}
 
 
         default:

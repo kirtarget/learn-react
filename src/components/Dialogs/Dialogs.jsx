@@ -1,21 +1,10 @@
 import classes from './Dialogs.module.scss'
-import Message from "./Message/Message";
-import DialogItem from "./DialogItem/DialogItem";
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 
 const Dialogs = (props) => {
 
-
-    let dialogElements = props.dialogState.dialogs.map(dialog => (
-
-
-        <DialogItem profileImage={dialog.profileImage}
-                    name={dialog.name} id={dialog.id}
-                    className={classes.dialogItem}/>)
-    )
-    let messagesElements = props.dialogState.messages.map(message => <Message className={classes.message}
-                                                                              message={message.message}/>)
     let newMessageElement = React.createRef()
 
     let onMessageChange = () => {
@@ -27,10 +16,27 @@ const Dialogs = (props) => {
             <h1>📝 Сообщения</h1>
             <div className={classes.dialogs}>
                 <div>
-                    {dialogElements}
+                    {
+                        props.dialogState.dialogs.map(dialog => {
+                            return (
+                                <div key={dialog.id}>
+                                    <NavLink to={"/dialogs/" + dialog.id}>
+                                        <div className={classes.dialogItem}>
+                                            <div>
+                                                <img src={dialog.profileImage} alt={dialog.name}></img></div>
+                                            <div>{dialog.name}</div>
+                                        </div>
+                                    </NavLink>
+                                </div>)
+                        })
+                    }
                 </div>
                 <div className={classes.messages}>
-                    {messagesElements}
+                    {
+                        props.dialogState.messages.map(message => {
+                            return <div key={message.id} className={classes.message}>{message.message}</div>
+                        })
+                    }
                     <div className={classes.dialTA}>
                         <textarea onChange={onMessageChange} ref={newMessageElement}
                                   value={props.dialogState.newMessageText}></textarea>

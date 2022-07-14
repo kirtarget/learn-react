@@ -22,26 +22,32 @@ const initialState = {
     navLinks: [
 
         {
+            id: 1,
             name: 'Профиль',
             link: '/profile'
         },
         {
+            id: 6,
             name: 'Пользователи',
             link: '/users'
         },
         {
+            id: 2,
             name: 'Сообщения',
             link: '/dialogs'
         },
         {
+            id: 3,
             name: 'Новости',
             link: '/news'
         },
         {
+            id: 4,
             name: 'Музыка',
             link: '/music'
         },
         {
+            id: 5,
             name: 'Настройки',
             link: '/settings'
         },

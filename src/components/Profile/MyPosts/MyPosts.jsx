@@ -4,7 +4,7 @@ import React from "react";
 
 const   MyPosts = (props) => {
     // создание компоненты для каждого поста
-    let postsElements = props.posts.map(p => <Post message={p.message} likes={p.likesCount}/>).reverse()
+    let postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likes={p.likesCount}/>).reverse()
 
     // Добавление поста и изменения текста нового поста в BLL
     let onAddPost = () => {
