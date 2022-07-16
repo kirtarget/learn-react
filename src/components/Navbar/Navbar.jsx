@@ -1,6 +1,6 @@
 import classes from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
-import SidebarFriends from "./SidebarFriends/SidebarFriends";
+
 
 const Navbar = (props) => {
 
@@ -15,7 +15,20 @@ const Navbar = (props) => {
 
                 </ul>
             </div>
-            <SidebarFriends sbFriends={props.sbFriends}/>
+            {(
+
+
+                <div>
+                    <h3>Мои друзья</h3>
+                    <div className={classes.sidebarFriends}>
+                        {props.sbFriends.map(friend => <div key={friend.id} className={classes.sbFriend}><img alt=''
+                                                                                                              src={friend.profilePic}></img>
+                            <p>{friend.name}</p></div>)}
+                    </div>
+                </div>
+
+            )
+            }
         </nav>
     )
 }

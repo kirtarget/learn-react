@@ -1,0 +1,45 @@
+.content{
+    grid-area: content;
+    background-color: #ffbcf1;
+
+}
+
+.coverImage {
+  width: 100%;
+  display: none;
+  height: 150px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.profileLinks {
+
+  display: flex;
+  flex-direction: column;
+
+  p {
+    font-weight: bold;
+    margin-right: 10px;
+
+  }
+
+  div {
+    margin-top: 10px;
+  }
+}
+
+.linkLine {
+  display: flex
+}
+
+.profilePic {
+  display: flex;
+  height: 350px;
+  border-radius: 175px;
+  margin: 20px auto 0;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 25px;
+}
