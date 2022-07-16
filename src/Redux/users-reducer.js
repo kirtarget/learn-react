@@ -1,3 +1,7 @@
+// Переменные для экшнов
+
+import {UserAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -6,15 +10,62 @@ const SET_TOTAL_USERSCOUNT = 'SET_TOTAL_USERSCOUNT'
 const SET_IS_FETCHING = 'SET_IS_FETCHING'
 const SET_FOLLOWING_IN_PROGRESS = 'SET_FOLLOWING_IN_PROGRESS'
 
-
-export const follow = (userID) => ({type: FOLLOW, userID})
-export const unfollow = (userID) => ({type: UNFOLLOW, userID})
+// Создание экшнов
+export const acceptFollow = (userID) => ({type: FOLLOW, userID})
+export const acceptUnfollow = (userID) => ({type: UNFOLLOW, userID})
 export const setUsers = (users) => ({type: SET_USERS, users})
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
 export const setTotalUsersCount = totalUsersCount => ({type: SET_TOTAL_USERSCOUNT, totalUsersCount})
 export const toggleIsFetching = isFetching => ({type: SET_IS_FETCHING, isFetching})
 export const toggleFollowingInProgress = (isFetching, userId) => ({type: SET_FOLLOWING_IN_PROGRESS, isFetching, userId})
 
+// Санки
+
+export const getUsers = (currentPage, pageSize) => {
+
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+
+        UserAPI.getUsers(currentPage, pageSize)
+            .then(response => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(response.items))
+                dispatch(setTotalUsersCount(response.totalCount))
+            }).catch((e) => console.warn(e))
+    }
+}
+export const unfollow = (userId) => {
+
+    return (dispatch) => {
+        dispatch(toggleFollowingInProgress(true, userId))
+        UserAPI.unfollowUser(userId)
+            .then(response => {
+
+                if (response.data.resultCode === 0) {
+                    dispatch(acceptUnfollow(userId))
+                    dispatch(toggleFollowingInProgress(false, userId))
+                }
+
+            }).catch((e) => console.warn(e))
+    }
+}
+export const follow = (userId) => {
+
+    return (dispatch) => {
+        dispatch(toggleFollowingInProgress(true, userId))
+        UserAPI.followUser(userId)
+            .then(response => {
+
+                if (response.data.resultCode === 0) {
+                    dispatch(acceptFollow(userId))
+                    dispatch(toggleFollowingInProgress(false, userId))
+                }
+            }).catch((e) => console.warn(e))
+    }
+}
+
+
+// Начальный стейт
 const initialState = {
     users: [],
     pageSize: 15,
@@ -24,6 +75,7 @@ const initialState = {
     followingInProcess: []
 }
 
+// Диспатч
 const usersReducer = (state = initialState, action) => {
 
     switch (action.type) {
@@ -35,7 +87,6 @@ const usersReducer = (state = initialState, action) => {
                     if (u.id === action.userID) {
                         return {...u, followed: true}
                     }
-
                     return u
                 })
             }

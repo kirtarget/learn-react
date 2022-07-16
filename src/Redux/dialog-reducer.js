@@ -67,8 +67,6 @@ const dialogReducer = (state = initialState, action) => {
         default:
             return stateCopy
     }
-
-
 }
 
 export default dialogReducer

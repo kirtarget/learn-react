@@ -19,21 +19,19 @@ export const UserAPI = {
 
     followUser(userId) {
 
-        return instance.post(`follow/${userId}`, {}, {
-            withCredentials: true,
-            headers: {
-                "API-KEY": "35b971ab-cbab-431d-8e1a-6741fea88e6e"
-            }
-        })
+        return instance.post(`follow/${userId}`)
     },
     unfollowUser(userId) {
 
-        return axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
-            withCredentials: true,
-            headers: {
-                "API-KEY": "35b971ab-cbab-431d-8e1a-6741fea88e6e"
-            }
-        })
+        return instance.delete(`follow/${userId}`)
+    },
+
+    loggingIn() {
+        return instance.get(`auth/me`)
+    },
+
+    gettingProfile(userId) {
+        return instance.get(`profile/${userId}`)
     }
 }
 

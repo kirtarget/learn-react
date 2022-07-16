@@ -1,10 +1,8 @@
 import classes from './Header.module.scss'
-import axios from "axios";
-import {NavLink} from "react-router-dom";
 import React from "react";
 
-const Header = (props) => {
 
+const Header = (props) => {
 
     return (
         <header className={classes.header}>
@@ -13,8 +11,7 @@ const Header = (props) => {
                 alt=''/>
             <h2>ВReact'е</h2>
             <div className={classes.loginBlock}>
-                {props.isAuth ? props.login :
-                    <a href="#">Login</a>}
+                {props.isAuth ? props.login : <button onClick={props.logIn}>Login</button>}
             </div>
         </header>
     )

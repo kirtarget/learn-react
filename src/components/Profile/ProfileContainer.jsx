@@ -1,9 +1,7 @@
 import React from 'react'
-
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
-import {setUserProfile} from "../../Redux/profile-reducer";
+import {getProfile, getProfileAgain, setUserProfile} from "../../Redux/profile-reducer";
 import {useParams,} from "react-router-dom";
 import {toggleIsFetching} from "../../Redux/users-reducer";
 
@@ -17,32 +15,16 @@ export function withRouter(Children) {
 
 class ProfileContainer extends React.Component {
 
-
     componentDidMount() {
-        // let userId = this.props.userId
-        this.props.toggleIsFetching(true)
-        // console.log(this.props.userId)
-
-        // let userId = this.props.ProfilePageIdGetter()
         let userId = this.props.match.params.userId
-        if (!userId) userId = 24940
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(response => {
-
-            this.props.setUserProfile(response.data)
-            this.props.toggleIsFetching(false)
-
-        }).catch((e) => console.warn(e))
+        this.props.getProfile(userId)
     }
 
     componentDidUpdate(props) {
         let userId = this.props.match.params.userId
         if (props.match.params.userId !== userId) {
             userId = 24940
-            axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-                .then(response => {
-                    this.props.setUserProfile(response.data);
-                });
+            this.props.getProfileAgain(userId)
         }
     }
 
@@ -55,12 +37,6 @@ class ProfileContainer extends React.Component {
     }
 }
 
-// let ProfilePageIdGetter =() => {
-//     // Get the userId param from the URL.
-//     let  params  = useParams();
-//     // ...
-//     return params.userId
-// }
 
 
 let mapStateToProps = (state) => ({
@@ -70,4 +46,9 @@ let mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, {setUserProfile, toggleIsFetching})(withRouter(ProfileContainer))
+export default connect(mapStateToProps, {
+    setUserProfile,
+    getProfile,
+    getProfileAgain,
+    toggleIsFetching
+})(withRouter(ProfileContainer))

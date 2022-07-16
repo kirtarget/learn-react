@@ -1,8 +1,6 @@
 import './Users.scss'
-
 import React from 'react'
 import {NavLink} from "react-router-dom";
-import {UserAPI} from "../../api/api";
 
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -10,7 +8,6 @@ let Users = (props) => {
     for (let i = 1; i <= 30; i++) {
         pages.push(i)
     }
-
 
     return (
         <div>
@@ -39,36 +36,11 @@ let Users = (props) => {
 
                                 {u.followed ?
                                     <button disabled={props.followingInProcess.some(id => id === u.id)} onClick={() => {
-                                        props.toggleFollowingInProgress(true, u.id)
-                                        UserAPI.unfollowUser(u.id)
-                                            .then(response => {
-
-                                                if (response.data.resultCode === 0) {
-                                                    props.unfollow(u.id)
-                                                    props.toggleFollowingInProgress(false, u.id)
-                                                }
-
-
-                                            }).catch((e) => console.warn(e))
-
-
+                                        props.unfollow(u.id)
                                     }} className="subscribeButton">Отписаться</button> :
                                     <button disabled={props.followingInProcess.some(id => id === u.id)} onClick={() => {
-                                        props.toggleFollowingInProgress(true, u.id)
-
-                                        UserAPI.followUser(u.id).then(response => {
-
-                                            if (response.data.resultCode === 0) {
-                                                props.follow(u.id)
-                                                props.toggleFollowingInProgress(false, u.id)
-                                            }
-
-
-                                        }).catch((e) => console.warn(e))
-
-
+                                        props.follow(u.id)
                                     }} className="subscribeButton">Подписаться</button>}
-
                             </div>
                         </div>
                     </div>
@@ -76,7 +48,6 @@ let Users = (props) => {
             }
         < /div>
     )
-
 }
 
 

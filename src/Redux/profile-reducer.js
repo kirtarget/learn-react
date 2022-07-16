@@ -1,3 +1,6 @@
+import axios from "axios";
+import {UserAPI} from "../api/api";
+
 const UPDATE_POST_TEXT = 'UPDATE_POST_TEXT'
 const ADD_POST = 'ADD_POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -6,6 +9,31 @@ export const addPostActionCreator = () => ({type: ADD_POST})
 export const onPostActionCreator = (text) => ({type: UPDATE_POST_TEXT, newText: text})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 
+// Санки
+
+export const getProfile = (userId) => {
+    return (dispatch) => {
+
+
+        if (!userId) userId = 24940
+
+        UserAPI.gettingProfile(userId).then(response => {
+            console.log(response)
+            dispatch(setUserProfile(response.data))
+        }).catch((e) => console.warn(e))
+    }
+}
+export const getProfileAgain = (userId) => {
+    return (dispatch) => {
+
+        UserAPI.gettingProfile(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data))
+
+
+            })
+    }
+}
 let initialState = {
     posts: [
         {message: 'It\'s my first post', id: 2, likesCount: 8},
