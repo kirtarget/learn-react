@@ -1,5 +1,6 @@
 import classes from './Header.module.scss'
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 
 const Header = (props) => {
@@ -11,7 +12,7 @@ const Header = (props) => {
                 alt=''/>
             <h2>ВReact'е</h2>
             <div className={classes.loginBlock}>
-                {props.isAuth ? props.login : <button onClick={props.logIn}>Login</button>}
+                {props.isAuth ? props.login : <NavLink to={'/login'} onClick={props.logIn}>Login</NavLink>}
             </div>
         </header>
     )

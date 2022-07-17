@@ -31,7 +31,7 @@ class ProfileContainer extends React.Component {
     render() {
         return (
             <div>
-                <Profile props={{...this.props}} profile={this.props.profile}/>
+                <Profile isAuth={this.props.isAuth} profile={this.props.profile}/>
             </div>
         )
     }
@@ -41,6 +41,7 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 
 
 })

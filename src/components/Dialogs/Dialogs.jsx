@@ -1,6 +1,6 @@
 import classes from './Dialogs.module.scss'
 import React from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, Navigate} from "react-router-dom";
 
 
 const Dialogs = (props) => {
@@ -11,6 +11,7 @@ const Dialogs = (props) => {
         let text = newMessageElement.current.value
         props.updateStateMessage(text)
     }
+    if (!props.isAuth) return <Navigate to={'/login'}/>
     return (
         <div>
             <h1>📝 Сообщения</h1>

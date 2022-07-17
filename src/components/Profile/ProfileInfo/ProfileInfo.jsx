@@ -1,7 +1,6 @@
 import classes from './ProfileInfo.module.scss'
 import Preloader from "../../common/preloader";
 import React from "react";
-import {UserAPI} from "../../../api/api";
 
 
 const ProfileInfo = (props) => {

@@ -5,7 +5,8 @@ import {connect} from "react-redux";
 
 let mapStateToProps = (state) => {
     return {
-        dialogState: state.dialogPage
+        dialogState: state.dialogPage,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch) => {
