@@ -34,6 +34,5 @@ export const UserAPI = {
         return instance.get(`profile/${userId}`)
     },
 
-
 }
 

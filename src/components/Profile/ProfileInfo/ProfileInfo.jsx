@@ -1,6 +1,7 @@
 import classes from './ProfileInfo.module.scss'
 import Preloader from "../../common/preloader";
 import React from "react";
+import ProfileStatus from "./ProfileStatus";
 
 
 const ProfileInfo = (props) => {
@@ -21,6 +22,7 @@ const ProfileInfo = (props) => {
                      src={props.profile.photos.large != null ? props.profile.photos.large : 'https://icoholder.com/files/img/e95471fcdd8dc7f74fb9a1c5375eee56.jpeg'}></img>
                 <h3>{(props.profile.fullName).toUpperCase()}</h3>
                 <p>{props.profile.aboutMe}</p>
+                <ProfileStatus status='Hello'/>
                 <div className={classes.profileLinks}>
                     Ссылки:
                     <div className={classes.linkLine}><p>VK:</p><a
